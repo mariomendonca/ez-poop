@@ -5,6 +5,8 @@ import com.ezpoop.ezpoopbackend.repositories.LocationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class LocationService {
@@ -12,5 +14,15 @@ public class LocationService {
 
     public Location createLocation(Location location) {
         return locationRepository.save(location);
+    }
+
+    public Location getById(Long id) {
+        Optional<Location> location = locationRepository.findById(id);
+        if (location.isEmpty()) {
+            return new Location();
+//            throw new Exception("Does not exist a location with id " + id);
+        }
+
+        return location.get();
     }
 }

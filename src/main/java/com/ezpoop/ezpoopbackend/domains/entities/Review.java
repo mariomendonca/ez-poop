@@ -7,23 +7,18 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "locations")
 @Entity
-public class Location {
+@Table(name = "reviews")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private Double latitude;
-    private Double longitude;
+    private Long locationId;
+    private Integer rating;
+    private String comment;
     @CreationTimestamp
-    private LocalDateTime createdAt;
-    @OneToMany(mappedBy="locationId")
-    private List<Review> reviews;
-}
+    private LocalDateTime createdAt;}
