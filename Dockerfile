@@ -1,6 +1,12 @@
-FROM jelastic/maven:3.9.5-openjdk-21 AS build
+FROM ubuntu:latest as build
+
+RUN apt-get update
+RUN apt-get install openjdk-21-jdk -y
 COPY . .
-RUN mvn clean package -DskipTests
+
+RUN apt-get install maven -y
+RUN mvn clean install
+
 
 FROM openjdk:21-jdk-slim
 WORKDIR /app
